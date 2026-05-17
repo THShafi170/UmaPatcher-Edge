@@ -46,7 +46,6 @@
     <string name="check_for_updates">Check for updates</string>
     <string name="open_source_licenses">Open source licenses</string>
     <string name="view_source_code">View source code</string>
-    <string name="support_me">Support me on Ko-fi</string>
 
     <!-- Patcher options -->
     <string name="install_method">Install method</string>
@@ -128,4 +127,18 @@
     <string name="update_available_desc">A new version is available: %s\nOpen the download page?</string>
     <string name="failed_to_check_for_updates">Failed to check for updates</string>
     <string name="no_updates_available">No updates available</string>
+
+    <!-- Local Mod Source configuration -->
+    <string name="hachimi_mod_source">Hachimi source</string>
+    <string name="hachimi_mod_source_desc">Choose whether to fetch Hachimi from GitHub or use a local .so file.</string>
+    <string name="mod_source_github">GitHub releases</string>
+    <string name="mod_source_local">Local file (.so)</string>
+    <string name="use_custom_mod_lib">Local library file</string>
+    <string name="tap_to_select_mod_lib">Tap here to select local .so file</string>
+    <string name="custom_mod_lib_selected">Selected: %s</string>
+
+    <!-- Patching screen actions -->
+    <string name="stop_patching_and_cleanup">Stop patching</string>
+    <string name="launch_game">Start game</string>
+    <string name="patching_cancelled_by_user">Patching cancelled by user</string>
 </resources>

@@ -1,6 +1,6 @@
 -dontobfuscate
 
--keep,allowoptimization class com.leadrdrk.** { *; }
+-keep,allowoptimization class dev.LeadRDRK.UmaPatcherEdge.** { *; }
 
 # I hate R8!!!
 -keep class androidx.compose.ui.res.** { *; }

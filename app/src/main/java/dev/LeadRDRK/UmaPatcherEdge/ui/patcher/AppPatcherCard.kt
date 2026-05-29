@@ -52,21 +52,8 @@ fun AppPatcherCard(navigator: DestinationsNavigator) {
     // 0=Save, 1=Normal, 2=Direct, 3=Shizuku
     val installMethod = rememberSaveable { mutableIntStateOf(1) }
     var fileUris by rememberSaveable { mutableStateOf<Array<Uri>>(arrayOf()) }
-    val fileSelectLauncher = rememberLauncherForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-        val data = it.data ?: return@rememberLauncherForActivityResult
-
-        val clipData = data.clipData
-        if (clipData != null) {
-            fileUris = Array(clipData.itemCount) { i ->
-                clipData.getItemAt(i).uri
-            }
-            return@rememberLauncherForActivityResult
-        }
-
-        val uri = data.data
-        if (uri != null) {
-            fileUris = Array(1) { uri }
-        }
+    val fileSelectLauncher = rememberLauncherForActivityResult(ActivityResultContracts.OpenMultipleDocuments()) { uris ->
+        fileUris = uris.toTypedArray()
     }
     val isShizukuAvailable by ShizukuState.isAvailable
 
@@ -199,13 +186,7 @@ fun AppPatcherCard(navigator: DestinationsNavigator) {
                 ),
                 modifier = Modifier
                     .clickable {
-                        val intent = Intent(Intent.ACTION_OPEN_DOCUMENT)
-                            .apply {
-                                addCategory(Intent.CATEGORY_OPENABLE)
-                                putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
-                                type = "*/*"
-                            }
-                        fileSelectLauncher.launch(intent)
+                        fileSelectLauncher.launch(arrayOf("*/*"))
                     }
             ) {
                 Row(

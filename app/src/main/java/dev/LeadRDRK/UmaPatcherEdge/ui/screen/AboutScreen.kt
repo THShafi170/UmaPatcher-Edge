@@ -112,7 +112,7 @@ fun AboutScreen(navigator: DestinationsNavigator) {
                     text = stringResource(R.string.view_source_code),
                     icon = { Icon(painterResource(R.drawable.ic_github), null) }
                 ) {
-                    uriHandler.openUri("https://github.com/THShafi170/UmaPatcher-Edge")
+                    uriHandler.openUri("https://github.com/Tenshou170/UmaPatcher-Edge")
                 }
             }
         }

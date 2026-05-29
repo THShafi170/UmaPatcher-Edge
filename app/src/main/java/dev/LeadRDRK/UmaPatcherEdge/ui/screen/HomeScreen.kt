@@ -323,8 +323,8 @@ fun ModSourceCard() {
         defaultValue = ""
     )
 
-    val customSoLauncher = rememberLauncherForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-        val uri = result.data?.data ?: return@rememberLauncherForActivityResult
+    val customSoLauncher = rememberLauncherForActivityResult(ActivityResultContracts.OpenDocument()) { uri ->
+        if (uri == null) return@rememberLauncherForActivityResult
         try {
             context.contentResolver.takePersistableUriPermission(
                 uri,
@@ -419,13 +419,7 @@ fun ModSourceCard() {
                     modifier = Modifier
                         .fillMaxWidth()
                         .clickable {
-                            val intent = Intent(Intent.ACTION_OPEN_DOCUMENT)
-                                .apply {
-                                    addCategory(Intent.CATEGORY_OPENABLE)
-                                    type = "application/octet-stream"
-                                    putExtra(Intent.EXTRA_MIME_TYPES, arrayOf("application/octet-stream", "*/*"))
-                                }
-                            customSoLauncher.launch(intent)
+                            customSoLauncher.launch(arrayOf("*/*"))
                         }
                 ) {
                     Row(

@@ -9,10 +9,9 @@ This guide provides in-depth, step-by-step instructions on setting up your envir
 To successfully compile the application, your build environment must meet the following requirements:
 
 ### 1. Java Development Kit (JDK)
-UmaPatcher-Edge utilizes **Gradle 8.11.1** and modern Kotlin versions, which require a hybrid Java toolchain environment:
-* **Gradle Runner (Gradle Daemon)**: Run on **JDK 17** or **JDK 21**. Running on bleeding-edge JDK versions (like JDK 25+) may cause Gradle daemon startup failures due to unsupported major class versions.
-* **Compilation Target**: The Kotlin/JVM compile task targets **JDK 8**.
-* **Automatic Discovery**: Gradle will automatically scan standard JVM folders, but we recommend explicitly specifying paths if you run multiple JDK versions.
+UmaPatcher-Edge utilizes **Gradle 8.11.1** and modern Kotlin versions, which are configured to compile and build using **JDK 17**:
+* **Gradle Runner & Compilation**: Both the Gradle build daemon and compilation target/toolchain are consolidated on **JDK 17** (or compatible JDK 21). Running on bleeding-edge JDK versions (like JDK 25+) may cause Gradle daemon startup failures due to unsupported major class versions.
+* **Automatic Discovery**: Gradle will automatically scan standard JVM folders for JDK 17, but you can explicitly specify paths if you run multiple JDK versions.
 
 ### 2. Android SDK
 You need the Android SDK with:
@@ -27,12 +26,12 @@ You need the Android SDK with:
 ### Step 1: Clone the Repository
 Clone the repository recursively to ensure all submodules are downloaded:
 ```bash
-git clone --recursive https://github.com/THShafi170/UmaPatcher-Edge.git
+git clone --recursive https://github.com/Tenshou170/UmaPatcher-Edge.git
 cd UmaPatcher-Edge
 ```
 
 ### Step 2: Configure JDK Toolchains
-If you do not have JDK 17 and JDK 8 on your system, or if your system default is Java 25+, download and extract them:
+If you do not have JDK 17 on your system, or if your system default is Java 25+, download and extract it:
 
 #### 🐧 Linux (Adoptium API CLI Example)
 ```bash
@@ -41,16 +40,11 @@ mkdir -p ~/jvm
 # Download and extract JDK 17
 curl -L -o ~/jvm/jdk17.tar.gz "https://api.adoptium.net/v3/binary/latest/17/ga/linux/x64/jdk/hotspot/normal/eclipse"
 tar -xzf ~/jvm/jdk17.tar.gz -C ~/jvm && rm ~/jvm/jdk17.tar.gz
-
-# Download and extract JDK 8
-curl -L -o ~/jvm/jdk8.tar.gz "https://api.adoptium.net/v3/binary/latest/8/ga/linux/x64/jdk/hotspot/normal/eclipse"
-tar -xzf ~/jvm/jdk8.tar.gz -C ~/jvm && rm ~/jvm/jdk8.tar.gz
 ```
 
 #### 🪟 Windows (Eclipse Temurin Installers)
 1. Download and run the **JDK 17** installer from [Adoptium Eclipse Temurin](https://adoptium.net/temurin/releases/?version=17).
-2. Download and run the **JDK 8** installer from [Adoptium Eclipse Temurin](https://adoptium.net/temurin/releases/?version=8).
-3. The installers will default to installing under `C:\Program Files\Eclipse Adoptium\`.
+2. The installer will default to installing under `C:\Program Files\Eclipse Adoptium\`.
 
 #### Configuring gradle.properties (Globally - Highly Recommended)
 To keep your local git repository clean and prevent machine-specific directories from being committed to version control, it is highly recommended to configure your JDK toolchain paths inside your **global Gradle configuration** rather than the project-level file.
@@ -59,17 +53,17 @@ Create or open the global `gradle.properties` file in your user home directory:
 * **🐧 Linux**: `~/.gradle/gradle.properties`
 * **🪟 Windows**: `%USERPROFILE%\.gradle\gradle.properties` (e.g., `C:\Users\<username>\.gradle\gradle.properties`)
 
-Append the paths to both of your extracted JDKs:
+Append the path to your extracted JDK 17:
 
 * **For Linux (`~/.gradle/gradle.properties`)**:
   ```properties
-  org.gradle.java.installations.paths=/home/<username>/jvm/jdk-17.0.19+10,/home/<username>/jvm/jdk8u492-b09
+  org.gradle.java.installations.paths=/home/<username>/jvm/jdk-17.0.19+10
   ```
 * **For Windows (`%USERPROFILE%\.gradle\gradle.properties` - note the escaped double backslashes)**:
   ```properties
-  org.gradle.java.installations.paths=C:\\Program Files\\Eclipse Adoptium\\jdk-17.0.10.7-hotspot,C:\\Program Files\\Eclipse Adoptium\\jdk-8.0.402.7-hotspot
+  org.gradle.java.installations.paths=C:\\Program Files\\Eclipse Adoptium\\jdk-17.0.10.7-hotspot
   ```
-*(Replace directory names with the actual exact folder names of your JDK installations)*
+*(Replace directory names with the actual exact folder names of your JDK installation)*
 
 ### Step 3: Configure Android SDK
 Create or open `local.properties` in the root of the project and specify your Android SDK location:
@@ -181,6 +175,4 @@ The compiled APK will be generated at:
     gradlew.bat ...
     ```
 
-### 2. Cannot find a Java installation matching languageVersion 8
-* **Cause**: Kotlin requires compiling using a JDK 8 toolchain, but Gradle could not locate a valid JDK 8 on your machine.
-* **Fix**: Ensure you have configured the `org.gradle.java.installations.paths` setting inside your **global `gradle.properties`** (e.g. `~/.gradle/gradle.properties` on Linux or `%USERPROFILE%\.gradle\gradle.properties` on Windows) pointing to your JDK 8 directory as explained in the Environment Setup section above.
+

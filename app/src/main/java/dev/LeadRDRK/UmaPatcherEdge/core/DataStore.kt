@@ -28,7 +28,7 @@ val defaultValues = mapOf(
     Pair(PrefKey.CHECK_FOR_UPDATES, true),
     Pair(PrefKey.LAST_UPDATE_CHECK, 0L),
     Pair(PrefKey.APP_LIBS_VERSION, ""),
-    Pair(PrefKey.HACHIMI_REPO, "THShafi170/Hachimi-Edge"),
+    Pair(PrefKey.HACHIMI_REPO, "Tenshou170/Hachimi-Edge"),
     Pair(PrefKey.HACHIMI_MOD_SOURCE, "github"),
     Pair(PrefKey.CUSTOM_MOD_SO_URI, ""),
     Pair(PrefKey.CUSTOM_MOD_SO_NAME, "")

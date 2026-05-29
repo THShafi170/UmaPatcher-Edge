@@ -116,7 +116,8 @@ class AppPatcher(
         val modArm64Lib = context.modArm64Lib
 
         val packageInfo = GameChecker.getPackageInfo(context.packageManager) ?: return false
-        val appApkDir = File(packageInfo.applicationInfo.publicSourceDir).parentFile ?: return false
+        val publicSourceDir = packageInfo.applicationInfo?.publicSourceDir ?: return false
+        val appApkDir = File(publicSourceDir).parentFile ?: return false
 
         val arm64LibDir = appApkDir.resolve("lib/arm64")
 

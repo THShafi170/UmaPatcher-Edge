@@ -60,7 +60,7 @@ fun AppSelectScreen(navigator: DestinationsNavigator) {
                 AppEntry(
                     appName = pm.getApplicationLabel(appInfo).toString(),
                     packageName = packageInfo.packageName,
-                    version = packageInfo.versionName,
+                    version = packageInfo.versionName ?: "Unknown",
                     icon = appInfo.loadIcon(pm).toBitmap().asImageBitmap(),
                     onClick = {
                         GameChecker.currentPackageName = packageInfo.packageName

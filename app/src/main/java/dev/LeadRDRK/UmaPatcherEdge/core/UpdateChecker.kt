@@ -13,7 +13,7 @@ import kotlinx.coroutines.launch
 object UpdateChecker {
     private const val CHECK_TIMEOUT = 300000 // 5 minutes
 
-    private val releases = GitHubReleases("THShafi170/UmaPatcher-Edge")
+    private val releases = GitHubReleases("Tenshou170/UmaPatcher-Edge")
     private const val currentTag = "v${BuildConfig.VERSION_NAME}"
     private val scope = CoroutineScope(Dispatchers.IO)
 
